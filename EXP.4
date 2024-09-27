@@ -1,0 +1,102 @@
+!pip install -U kaleido
+
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from google.colab import files
+upload = files.upload()
+# Load the dataset
+df = pd.read_csv('Advertising.csv')
+
+# Display the first few rows of the dataset
+print("First 5 rows of the dataset:")
+print(df.head())
+
+# Checking for missing values
+print("\nMissing values in each column:")
+print(df.isnull().sum())
+
+# Data types and non-null counts
+print("\nData types and non-null counts:")
+print(df.info())
+
+# Summary statistics for numerical columns
+print("\nSummary statistics for numerical columns:")
+print(df.describe())
+
+# Summary statistics for categorical columns
+categorical_cols = df.select_dtypes(include=['object']).columns
+if len(categorical_cols) > 0:  # Check if there are any categorical columns
+    print("\nSummary statistics for categorical columns:")
+    print(df[categorical_cols].describe())
+else:
+    print("\nNo categorical columns found in the DataFrame.")
+
+
+# Check unique values in categorical columns
+print("\nUnique values in categorical columns:")
+for col in categorical_cols:
+    print(f"{col}: {df[col].nunique()} unique values")
+
+# Check for duplicates
+print(f"\nNumber of duplicate rows: {df.duplicated().sum()}")
+
+# Dropping duplicates (if needed)
+df = df.drop_duplicates()
+     
+Collecting kaleido
+  Downloading kaleido-0.2.1-py2.py3-none-manylinux1_x86_64.whl.metadata (15 kB)
+Downloading kaleido-0.2.1-py2.py3-none-manylinux1_x86_64.whl (79.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.9/79.9 MB 6.2 MB/s eta 0:00:00
+Installing collected packages: kaleido
+Successfully installed kaleido-0.2.1
+Upload widget is only available when the cell has been executed in the current browser session. Please rerun this cell to enable.
+Saving Advertising.csv to Advertising (1).csv
+First 5 rows of the dataset:
+      TV  radio  newspaper  sales
+0  230.1   37.8       69.2   22.1
+1   44.5   39.3       45.1   10.4
+2   17.2   45.9       69.3    9.3
+3  151.5   41.3       58.5   18.5
+4  180.8   10.8       58.4   12.9
+
+Missing values in each column:
+TV           0
+radio        0
+newspaper    0
+sales        0
+dtype: int64
+
+Data types and non-null counts:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 200 entries, 0 to 199
+Data columns (total 4 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   TV         200 non-null    float64
+ 1   radio      200 non-null    float64
+ 2   newspaper  200 non-null    float64
+ 3   sales      200 non-null    float64
+dtypes: float64(4)
+memory usage: 6.4 KB
+None
+
+Summary statistics for numerical columns:
+               TV       radio   newspaper       sales
+count  200.000000  200.000000  200.000000  200.000000
+mean   147.042500   23.264000   30.554000   14.022500
+std     85.854236   14.846809   21.778621    5.217457
+min      0.700000    0.000000    0.300000    1.600000
+25%     74.375000    9.975000   12.750000   10.375000
+50%    149.750000   22.900000   25.750000   12.900000
+75%    218.825000   36.525000   45.100000   17.400000
+max    296.400000   49.600000  114.000000   27.000000
+
+No categorical columns found in the DataFrame.
+
+Unique values in categorical columns:
+
+Number of duplicate rows: 0
